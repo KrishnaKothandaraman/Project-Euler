@@ -71,3 +71,18 @@ getProd (x:xs) = ((read [x]) :: Int) * getProd xs
 
 p8 :: Int
 p8 = head $ reverse $ sort $ map (getProd) [substr i (i+13) thousand_digit_num | i <- [0..((length $ thousand_digit_num) - 13)]]
+
+is_square n = sq * sq == n
+    where sq = floor $ sqrt $ (fromIntegral n::Double)
+
+p9 :: [Int]
+p9 = [a*b*(isqrt (a^2+b^2)) | a <- [1..1000] , b <- [1..1000], is_square(a^2+b^2) && (a+b+isqrt(a^2+b^2) == 1000)]
+
+-- Sieve of Eratosthenes
+sieve :: [(Int, Int)] -> [(Int, Int)]
+sieve (x:xs) = case snd x of 
+                0 -> sieve xs
+                _ -> [x] ++ sieve new_x 
+                     where new_x = []
+-- this has defeated me. I will be back
+p10 = undefined
