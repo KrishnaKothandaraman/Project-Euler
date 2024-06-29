@@ -80,3 +80,39 @@ def p12():
 
 def p13(t):
     str(sum([int(tt) for tt in t.split("\n")]))[:10]
+
+
+def p14():
+    n = 13
+    ans = 0
+    max_n = 0
+    while n < 1_000_000:
+        n2 = n
+        ans2 = 0
+        while n2 != 1:
+            if n2 % 2:
+                n2 = 3*n2+1
+            else:
+                n2 = n2//2
+            ans2 += 1
+        if ans2 > ans:
+            max_n = n
+            ans = ans2
+        n += 1
+    print(max_n)
+
+def p15(r, c, r_dim, c_dim, memo):
+    if r >= r_dim or c >= c_dim:
+        return 0
+    if (r,c) in memo:
+        return memo[(r,c)]
+    if r == r_dim - 1 and c == c_dim - 1:
+        return 1
+    ans = 0
+    ans += p15(r+1, c, r_dim, c_dim, memo)
+    ans += p15(r, c+1, r_dim, c_dim, memo)
+    memo[(r,c)] = ans
+    return ans
+    
+
+
